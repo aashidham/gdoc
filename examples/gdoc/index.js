@@ -14,13 +14,15 @@ server.listen(port, function () {
 // Routing
 app.use(express.static(__dirname + '/public/'));
 
-// Chatroom
-
+// Document editing
 io.on('connection', function (socket) {
-  // when the client emits 'new message', this listens and executes
+
+  //the first time the client loads the page, the prior state is used to populate the screen
   socket.on('init',function(data) {
 	io.emit('text',prevText);
   });
+
+  //when the server is called with 'text', it is relayed back to all its peers directly
   socket.on('text', function (data) {
     // we tell the client to execute 'text'
     //console.log(data);
