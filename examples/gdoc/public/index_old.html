@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO gdoc</title>
+  </head>
+  <body>
+	<textarea class="editor" rows="4" cols="50">
+	At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
+	</textarea>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script>
+		$(".editor").keyup(function (event) {
+			var text = $(".editor").val();
+			socket.emit('text', text);
+		});
+	</script>
+	<script>
+		var socket = io();
+		socket.on('text', function(msg){
+			$(".editor").val(msg);
+		});
+	</script>
+  </body>
+</html>
